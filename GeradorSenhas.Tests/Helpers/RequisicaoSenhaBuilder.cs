@@ -1,10 +1,4 @@
-﻿using GeradorSenhas.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GeradorSenhas.Core.Models;
 
 namespace GeradorSenhas.Tests.Helpers
 {
@@ -15,6 +9,7 @@ namespace GeradorSenhas.Tests.Helpers
         private bool podeConterLetrasAcentuadas;
         private bool podeConterNumeros;
         private bool podeConterCaracteresEspeciais;
+        private int numeroCaracteres;
 
         public RequisicaoSenhaBuilder()
         {
@@ -87,6 +82,14 @@ namespace GeradorSenhas.Tests.Helpers
             podeConterLetrasAcentuadas = false;
             podeConterNumeros = false;
             podeConterCaracteresEspeciais = false;
+            numeroCaracteres = 10;
+
+            return this;
+        }
+
+        public RequisicaoSenhaBuilder ComNumeroCaracteres(int number)
+        {
+            numeroCaracteres = number;
 
             return this;
         }
@@ -100,19 +103,16 @@ namespace GeradorSenhas.Tests.Helpers
                 PodeConterLetrasMaiusculas = podeConterLetrasMaiusculas,
                 PodeConterLetrasMinúsculas = podeConterLetrasMinúsculas,
                 PodeConterNumeros = podeConterNumeros,
+                QuantidadeCaracteres = numeroCaracteres
             };
         }
 
         public RequisicaoSenha BuildRequisicaoInvalida()
         {
-            return new RequisicaoSenha
-            {
-                PodeConterCaracteresEspeciais = podeConterCaracteresEspeciais,
-                PodeConterLetrasAcentuadas = podeConterLetrasAcentuadas,
-                PodeConterLetrasMaiusculas = podeConterLetrasMaiusculas,
-                PodeConterLetrasMinúsculas = podeConterLetrasMinúsculas,
-                PodeConterNumeros = podeConterNumeros,
-            };
+            return new RequisicaoSenhaBuilder()
+            .ComCaracteresEspeciais()
+            .ComNumeroCaracteres(2)
+            .Build();
         }
     }
 }

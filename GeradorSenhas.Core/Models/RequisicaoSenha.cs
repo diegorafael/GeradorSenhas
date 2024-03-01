@@ -1,5 +1,4 @@
-﻿
-namespace GeradorSenhas.Core
+﻿namespace GeradorSenhas.Core.Models
 {
     public class RequisicaoSenha
     {
@@ -8,5 +7,6 @@ namespace GeradorSenhas.Core
         public bool PodeConterLetrasAcentuadas { get; set; }
         public bool PodeConterNumeros { get; set; }
         public bool PodeConterCaracteresEspeciais { get; set; }
+        public int QuantidadeCaracteres { get; set; }
     }
 }
